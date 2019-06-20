@@ -2,31 +2,29 @@ require_relative "mystack"
 require_relative "myqueue"
 class StackQueue
    def initialize
-    @stack1 = MyStack.new
-    @stack2 = MyStack.new
+    @in = MyStack.new
+    @out = MyStack.new
    end
 
    def size
-    @stack1.size
+    @in.size + @out.size
    end
 
    def enqueue(el)
-      until @stack1.empty?
-        @stack2.push(@stack1.pop)
-      end
-      stack1.push(el)
+      @in.push(el)
    end 
 
    def dequeue
-      raise "is empty" if @stack1.empty?
-      until stack2.empty?
-        @stack1.push(@stack2.pop)
+      raise "is empty" if @in.empty?
+      return @out.pop unless @out.empty?
+      until @in.empty?
+        @out.push(@in.pop)
       end
-      @stack1.pop
+      @out.pop
    end
 
    def empty?
-    @stack1.empty?
+    @in.empty? && @out.empty?
    end
 
 end
