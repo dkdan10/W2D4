@@ -1,5 +1,5 @@
-require_relative "mystack"
-require_relative "myqueue"
+require './mystack.rb'
+require "./myqueue"
 class StackQueue
    def initialize
     @in = MyStack.new
@@ -15,7 +15,7 @@ class StackQueue
    end 
 
    def dequeue
-      raise "is empty" if @in.empty?
+      raise "is empty" if self.empty?
       return @out.pop unless @out.empty?
       until @in.empty?
         @out.push(@in.pop)
